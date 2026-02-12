@@ -68,15 +68,37 @@ body {
   filter: drop-shadow(0 0 10px rgba(0, 242, 255, 0.3));
 }
 
-.nav-profile img {
-  width: 40px; height: 40px;
+/* 1. Style the Container (The Gradient Ring) */
+.nav-profile {
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  border: 2px solid transparent;
-  background: linear-gradient(to right, var(--neon-blue), var(--neon-orange)) border-box; 
-  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  object-fit: cover;
+  /* This creates the gradient border effect */
+  background: linear-gradient(135deg, var(--neon-blue), var(--neon-orange));
+  padding: 2px; /* This determines the border thickness */
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.nav-profile:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+}
+
+/* 2. Style the Image (The Inner Content) */
+.nav-profile img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  /* Optional: Adds a small black gap between the ring and the photo */
+  border: 2px solid var(--bg-deep); 
+  background-color: var(--bg-deep);
+  
+  /* IMPORTANT: We removed the 'mask' properties that were hiding the photo */
 }
 
 .nav-icons { display: flex; align-items: center; gap: 20px; }
@@ -319,3 +341,121 @@ textarea::placeholder { color: #555; }
   transition: 0.3s;
 }
 .login-btn:hover { transform: scale(1.02); }
+/* === COMMENT SECTION === */
+.comments-section {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.comments-list {
+  max-height: 200px; /* Scrollable if too many comments */
+  overflow-y: auto;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Custom Scrollbar for comments */
+.comments-list::-webkit-scrollbar { width: 4px; }
+.comments-list::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+
+.comment-bubble {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 0.9rem;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.avatar-tiny {
+  width: 25px; height: 25px; border-radius: 50%; object-fit: cover;
+}
+
+.comment-content { display: flex; flex-direction: column; }
+.comment-content strong { font-size: 0.8rem; margin-bottom: 2px; }
+.comment-content p { margin: 0; color: #ddd; line-height: 1.3; }
+
+.neon-text-blue { color: var(--neon-blue); }
+.neon-text-purple { color: #d6a2ff; text-shadow: 0 0 5px rgba(214, 162, 255, 0.3); }
+
+.loading-text, .empty-text {
+  text-align: center; color: #666; font-size: 0.85rem; font-style: italic; margin: 10px 0;
+}
+
+/* INPUT AREA */
+.comment-input-wrapper {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.comment-input-wrapper input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 10px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.comment-input-wrapper input:focus {
+  background: rgba(0, 0, 0, 0.6);
+  border-color: var(--neon-blue);
+  box-shadow: 0 0 10px rgba(0, 242, 255, 0.1);
+}
+
+.comment-input-wrapper button {
+  background: transparent;
+  color: var(--neon-blue);
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 5px 10px;
+}
+.comment-input-wrapper button:hover {
+  text-shadow: 0 0 8px var(--neon-blue);
+}
+
+/* === PASSWORD TOGGLE === */
+.password-group {
+  position: relative; /* Needed to position the eye icon */
+}
+
+.password-group input {
+  padding-right: 45px; /* Make space for the icon so text doesn't overlap */
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0;
+  transition: color 0.3s;
+  z-index: 10;
+}
+
+.password-toggle-btn:hover {
+  color: var(--neon-blue);
+  text-shadow: 0 0 10px var(--neon-blue);
+}
